@@ -1,13 +1,10 @@
 public class Case{
     Position pos;
-    Direction dir;
 
-    Case (Position pos, Direction dir){
+    void setCase (Position pos){
         this.pos = pos;
-        this.dir = dir;
     }
     Case(){
         this.pos = new Position();
-        this.dir = new Direction();
     }
 }
