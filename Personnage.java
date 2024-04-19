@@ -1,8 +1,19 @@
 public class Personnage extends Case{
-    Direction dir;
-    void setCase(Position pos,Direction dir){
-        super.setCase(pos);
-        this.dir = dir;
+    private Direction direction;
+    
+    public Personnage (Position position, char symbole, Direction direction){
+        super(position,symbole);
+        this.direction = direction;
     }
+    public Personnage(){
+        super();
+        this.direction = new Direction();
+    }
+    
+
+    
+
+    
+    
     
 }

@@ -1,7 +1,5 @@
-public class Renard extends Predateur{
-   void setCase(Position pos, Direction dir)
-   {
-    this.pos = pos;
-    this.dir = dir;
-   } 
+public class Renard extends Predateurs{
+    public Renard(Position position, Direction direction){
+        super(position,'R',direction);
+    }
 }

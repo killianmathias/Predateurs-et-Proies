@@ -9,4 +9,10 @@ public class Position {
     Position(){
         this(0,0);
     }
+    public int getRow(){
+        return row;
+    }
+    public int getCol(){
+        return col;
+    }
 }

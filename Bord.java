@@ -1,8 +1,7 @@
 public class Bord extends Case{
-    boolean bord;
+    char vue = 'X';
     void setCase(Position pos) {
-        super.setCase(pos);
-        this.bord = true;
+        super.setCase(pos,this.vue);
     }
     
 }

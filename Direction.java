@@ -1,12 +1,18 @@
 public class Direction {
-    int rowDir;
-    int colDir;
+    private int rowDir;
+    private int colDir;
 
-    Direction(int rowDir, int colDir){
+    public Direction(int rowDir, int colDir){
         this.colDir = colDir;
         this.rowDir = rowDir;
     }
-    Direction(){
+    public Direction(){
         this(0,0);
+    }
+    public int getRowDir(){
+        return rowDir;
+    }
+    public int getColDir(){
+        return colDir;
     }
 }

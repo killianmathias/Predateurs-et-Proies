@@ -1,7 +1,5 @@
 public class Lapin extends Proies {
-    void setCase(Position pos, Direction dir)
-   {
-    this.pos = pos;
-    this.dir = dir;
-   } 
+    public Lapin(Position position, Direction direction){
+        super(position,'L',direction);
+    }
 }

@@ -1,7 +1,5 @@
 public class Proies extends Personnage {
-    int type;
-    void setCase(Position pos, Direction dir, int type) {
-        super.setCase(pos, dir);
-        this.type = 0;
+    public Proies(Position position,char symbole, Direction direction){
+        super(position,symbole, direction);
     }
 }

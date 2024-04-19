@@ -1,7 +1,5 @@
-public class Chasseur extends Predateur{
-   void setCase(Position pos, Direction dir)
-   {
-    this.pos = pos;
-    this.dir = dir;
-   } 
+public class Chasseur extends Predateurs{
+   public Chasseur(Position position, Direction direction){
+      super(position,'P',direction);
+  }
 }
