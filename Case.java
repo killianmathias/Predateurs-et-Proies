@@ -1,4 +1,4 @@
-public class Case{
+public class Case extends Grille{
     Position pos;
 
     void setCase (Position pos){

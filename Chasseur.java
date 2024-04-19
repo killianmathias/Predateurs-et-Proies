@@ -1,4 +1,4 @@
-public class Renard extends Predateur{
+public class Chasseur extends Predateur{
    void setCase(Position pos, Direction dir)
    {
     this.pos = pos;
