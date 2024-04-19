@@ -1,5 +1,5 @@
-public class Predateur extends Personnage{
-    void setCase(Position pos, char vue) {
-        setCase(pos,vue);
+public class Predateurs extends Personnage{
+    public Predateurs(Position position,char symbole, Direction direction){
+        super(position,symbole, direction);
     }
 }

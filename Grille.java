@@ -1,16 +1,23 @@
 public class Grille {
+    private int rows;
+    private int cols;
     private Case[][] plateau;
 
-    Grille(int largeur, int hauteur){
-        this.plateau = new Case[largeur][hauteur];
-        for (int i = 0; i < largeur; i++) {
-            for (int j = 0; j < hauteur; j++) {
-                this.plateau[i][j] = new Case();
-            }
-        }
+    public Grille(int rows, int cols){
+        this.rows = rows;
+        this.cols = cols;
+        this.plateau = new Case[rows][cols];
     }
-    Grille(){
+    public Grille(){
         this(0,0);
     }
-    
+    public void ajouterCase(Case box){
+        plateau[box.getPosition().getRow()][box.getPosition().getCol()] = box;
+    }
+    public Case getCase(Position position){
+        return plateau[position.getRow()][position.getCol()];
+    }
+    public void retirerCase(Position pos){
+        plateau[pos.getRow()][pos.getCol()] = null;
+    }
 }

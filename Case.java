@@ -2,7 +2,7 @@ public class Case extends Grille{
     private Position position;
     private char symbole;
 
-    public Case (Position position, char symbole){
+    public Case(Position position, char symbole){
         this.position = position;
         this.symbole = symbole;
     }
@@ -14,5 +14,11 @@ public class Case extends Grille{
     }
     void afficherCase(){
         Ecran.afficher(" "+ this.symbole+ " ");
+    }
+    public Position getPosition(){
+        return position;
+    }
+    public void setPosition(Position newPosition){
+        this.position=newPosition;
     }
 }
