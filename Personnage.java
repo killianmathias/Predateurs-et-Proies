@@ -13,11 +13,16 @@ public class Personnage extends Case{
     }
     public void seDeplacer(){
         // Ecran.afficher(getPosition().getCol());
-        int nouvelleLigne = getPosition().getRow() + direction.getRowDir();
-        int nouvelleColonne = getPosition().getCol() + direction.getColDir();
+        int nouvelleLigne = getPosition().getRow() + this.direction.getRowDir();
+        int nouvelleColonne = getPosition().getCol() +this.direction.getColDir();
         // Ecran.afficher(nouvelleColonne);
         setPosition(new Position(nouvelleLigne, nouvelleColonne));
-        setADejaBouge(true);
+    }
+    public Direction getDirection(){
+        return this.direction;
+    }
+    public void inverserDirection(){
+        this.direction = new Direction(-1*(this.direction.getRowDir()),-1*(this.direction.getColDir()));
     }
     public void setADejaBouge(boolean bool){
         this.aDejabouge=bool;
@@ -25,12 +30,4 @@ public class Personnage extends Case{
     public boolean getADejaBouge(){
         return aDejabouge;
     }
-    
-    
-
-    
-
-    
-    
-    
 }

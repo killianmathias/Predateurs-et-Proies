@@ -4,12 +4,14 @@ public class Main{
         Ecran.afficher("x: "+x+"\n");
         int y = (int)(1+Math.random()*(row-2));
         Ecran.afficher("y: "+y+'\n');
-        Position pos = new Position(x, y);
+        Position pos = new Position(y, x);
         return pos;
     }
     static Direction genererDirectionAleatoire(){
         int rowDir = (int)(Math.random()*3)-1;
+        Ecran.afficher("row : ", rowDir+ "\n");
         int colDir = (int)(Math.random()*3)-1;
+        Ecran.afficher("col: ", colDir+"\n");
         Direction dir = new Direction(rowDir, colDir);
         return dir;
     }
@@ -40,19 +42,23 @@ public class Main{
                 for (int j = 0; j < COLS; j++) {
                     Case caseCourante = grille.getCase(new Position(i, j));
                     if (caseCourante != null) {
+                        caseCourante.afficherCase();
                         if (caseCourante instanceof Personnage) {
                             Position tmp = caseCourante.getPosition();
                             Personnage perso = (Personnage) caseCourante;
                             if (!perso.getADejaBouge()) {
-                                if (perso.getPosition().getRow() > 1 && perso.getPosition().getRow() < ROWS - 2 && perso.getPosition().getCol() > 1 && perso.getPosition().getCol() < COLS - 1) {
-                                    perso.seDeplacer();
+                                if ((grille.getCase(new Position(perso.getPosition().getCol()+ perso.getDirection().getColDir(),perso.getPosition().getRow()+ perso.getDirection().getRowDir())) instanceof Bord)) {
+                                    perso.inverserDirection();
                                     perso.setADejaBouge(true);
-                                    grille.retirerCase(tmp);
+                                }else{
+                                    Ecran.afficher(perso.getPosition().getCol() +""+ perso.getPosition().getRow());
+                                    perso.seDeplacer();
                                     grille.ajouterCase(perso);
+                                    grille.retirerCase(tmp);
+                                    perso.setADejaBouge(true);
                                 }
                             }
                         }
-                        caseCourante.afficherCase();
                     } else {
                         Ecran.afficher(" . ");
                     }
@@ -70,7 +76,12 @@ public class Main{
                     }
                 }
             }
-        
+            
+            String c ="";
+            while(!c.equals("o")){
+                Ecran.afficher("Voulez-vous passer au tour suivant (o/n)\n");
+                c = Clavier.saisirString();
+            }
             tour_actuel++;
         }
     }        
