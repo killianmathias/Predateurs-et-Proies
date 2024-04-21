@@ -13,7 +13,7 @@ public class Case extends Grille{
         this(new Position());
     }
     void afficherCase(){
-        Ecran.afficher(" "+ this.symbole+ " ");
+        System.out.print(" "+ this.symbole+ " ");
     }
     public Position getPosition(){
         return position;

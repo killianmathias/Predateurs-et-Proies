@@ -41,45 +41,99 @@ public class Main{
             for (int i = 0; i < ROWS; i++) {
                 for (int j = 0; j < COLS; j++) {
                     Case caseCourante = grille.getCase(new Position(i, j));
-                    if (caseCourante != null) {
+                    if (caseCourante!=null){
                         caseCourante.afficherCase();
                         if (caseCourante instanceof Personnage) {
-                            Position tmp = caseCourante.getPosition();
                             Personnage perso = (Personnage) caseCourante;
-                            if (!perso.getADejaBouge()) {
-                                if ((grille.getCase(new Position(perso.getPosition().getCol()+ perso.getDirection().getColDir(),perso.getPosition().getRow()+ perso.getDirection().getRowDir())) instanceof Bord)) {
-                                    perso.inverserDirection();
-                                    perso.setADejaBouge(true);
-                                }else{
-                                    Ecran.afficher(perso.getPosition().getCol() +""+ perso.getPosition().getRow());
-                                    perso.seDeplacer();
-                                    grille.ajouterCase(perso);
-                                    grille.retirerCase(tmp);
-                                    perso.setADejaBouge(true);
-                                }
-                            }
+                            perso.setADejaBouge(false);
                         }
-                    } else {
+                    }else{
                         Ecran.afficher(" . ");
                     }
                 }
-                Ecran.sautDeLigne(); // Nouvelle ligne
+                Ecran.sautDeLigne();
             }
-        
-            // Réinitialisez l'indicateur aDejaBouge pour tous les personnages
             for (int i = 0; i < ROWS; i++) {
                 for (int j = 0; j < COLS; j++) {
                     Case caseCourante = grille.getCase(new Position(i, j));
-                    if (caseCourante instanceof Personnage) {
-                        Personnage perso = (Personnage) caseCourante;
-                        perso.setADejaBouge(false);
+                    if (caseCourante != null) {
+                        // caseCourante.afficherCase();
+                        
+                        if (caseCourante instanceof Personnage) {
+                            Personnage perso = (Personnage) caseCourante;
+                            Case caseSuivante = grille.getCase(new Position(perso.getPosition().getRow()+ perso.getDirection().getRowDir(),perso.getPosition().getCol() + perso.getDirection().getColDir()));
+                            if (!perso.getADejaBouge()) {
+                                Position positionY = new Position(perso.getPosition().getRow(),perso.getPosition().getCol() + perso.getDirection().getColDir());
+                                Position positionX = new Position(perso.getPosition().getRow()+ perso.getDirection().getRowDir(),perso.getPosition().getCol());
+                                if (grille.getCase(positionY) instanceof Bord) {
+                                    perso.inverserY();
+                                    perso.setADejaBouge(true);
+                                }else if (grille.getCase(positionX) instanceof Bord){
+                                    perso.inverserX();
+                                    perso.setADejaBouge(true);
+                                }else{
+                                    
+                                        if (perso instanceof Proies){
+                                            if (caseSuivante instanceof Personnage){
+                                                perso.fuir();
+                                            }else{
+                                                grille.retirerCase(perso.getPosition());
+                                                perso.seDeplacer();
+                                                grille.ajouterCase(perso);
+                                                perso.setADejaBouge(true);
+                                            };
+                                        }else if (perso instanceof Predateurs){
+                                            if (perso instanceof Renard){
+                                                if (caseSuivante instanceof Renard || caseSuivante instanceof Chasseur){
+                                                    perso.setDirection(genererDirectionAleatoire());
+                                                    perso.setADejaBouge(true);
+                                                }else if (caseSuivante instanceof Personnage){
+                                                    grille.retirerCase(caseSuivante.getPosition());
+                                                    grille.retirerCase(perso.getPosition());
+                                                    perso.seDeplacer();
+                                                    grille.ajouterCase(perso);
+                                                    perso.setADejaBouge(true);
+                                                }else{
+                                                    grille.retirerCase(perso.getPosition());
+                                                    perso.seDeplacer();
+                                                    grille.ajouterCase(perso);
+                                                    perso.setADejaBouge(true);
+                                                }
+                                            }else if (perso instanceof Chasseur){
+                                                if(caseSuivante instanceof Chasseur || caseSuivante instanceof Renard){
+                                                    perso.setDirection(genererDirectionAleatoire());
+                                                    perso.setADejaBouge(true);
+                                                    
+                                                }else if (caseSuivante instanceof Personnage){
+                                                    grille.retirerCase(caseSuivante.getPosition());
+                                                    grille.retirerCase(perso.getPosition());
+                                                    perso.seDeplacer();
+                                                    grille.ajouterCase(perso);
+                                                    perso.setADejaBouge(true);
+                                                }else {
+                                                    grille.retirerCase(perso.getPosition());
+                                                    perso.seDeplacer();
+                                                    grille.ajouterCase(perso);
+                                                    perso.setADejaBouge(true);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            
+                        }
+                    } else {
+                        
                     }
                 }
+                // Ecran.sautDeLigne(); // Nouvelle ligne
             }
+        
+            // Réinitialisez l'indicateur aDejaBouge pour tous les personnages
             
             String c ="";
             while(!c.equals("o")){
-                Ecran.afficher("Voulez-vous passer au tour suivant (o/n)\n");
+                Ecran.afficher("Voulez-vous passer au tour suivant (o/n/q)\n");
                 c = Clavier.saisirString();
             }
             tour_actuel++;

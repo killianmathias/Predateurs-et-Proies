@@ -21,13 +21,23 @@ public class Personnage extends Case{
     public Direction getDirection(){
         return this.direction;
     }
-    public void inverserDirection(){
-        this.direction = new Direction(-1*(this.direction.getRowDir()),-1*(this.direction.getColDir()));
+    public void inverserY(){
+        this.direction = new Direction(this.direction.getRowDir(),-1*(this.direction.getColDir()));
+    }
+    public void inverserX(){
+        this.direction = new Direction(-1*(this.direction.getRowDir()),this.direction.getColDir());
+    }
+    public void fuir(){
+        inverserX();
+        inverserY();
     }
     public void setADejaBouge(boolean bool){
         this.aDejabouge=bool;
     }
     public boolean getADejaBouge(){
         return aDejabouge;
+    }
+    public void setDirection(Direction newDirection){
+        this.direction = newDirection;
     }
 }
