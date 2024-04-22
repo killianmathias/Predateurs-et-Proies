@@ -21,4 +21,7 @@ public class Case extends Grille{
     public void setPosition(Position newPosition){
         this.position=newPosition;
     }
+    public void setSymbole(char symbole){
+        this.symbole = symbole;
+    }
 }

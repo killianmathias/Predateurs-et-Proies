@@ -1,6 +1,7 @@
 public class Personnage extends Case{
     private Direction direction;
     private boolean aDejabouge;
+    private Herbe caseActuelle;
     
     public Personnage (Position position, char symbole, Direction direction){
         super(position,symbole);
@@ -39,5 +40,11 @@ public class Personnage extends Case{
     }
     public void setDirection(Direction newDirection){
         this.direction = newDirection;
+    }
+    public Herbe getCaseActuelle(){
+        return this.caseActuelle;
+    }
+    public void setCaseActuelle(Herbe caseActuelle){
+        this.caseActuelle = caseActuelle;
     }
 }

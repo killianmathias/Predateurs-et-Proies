@@ -15,4 +15,16 @@ public class Direction {
     public int getColDir(){
         return colDir;
     }
+    public Direction genererDirectionAleatoire(){
+        int rowDir = (int)(Math.random()*3)-1;
+        int colDir = (int)(Math.random()*3)-1;
+        Direction dir = new Direction(rowDir, colDir);
+        return dir;
+    }
+    public void inverserDirY(){
+        this.colDir = (this.colDir)*(-1);
+    }
+    public void inverserDirX(){
+        this.rowDir = (this.rowDir)*(-1);
+    }
 }
