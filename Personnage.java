@@ -1,7 +1,8 @@
 public class Personnage extends Case{
     private Direction direction;
     private boolean aDejabouge;
-    private Herbe caseActuelle;
+    private Case caseActuelle;
+    boolean boost;
     
     public Personnage (Position position, char symbole, Direction direction){
         super(position,symbole);
@@ -14,8 +15,16 @@ public class Personnage extends Case{
     }
     public void seDeplacer(){
         // Ecran.afficher(getPosition().getCol());
-        int nouvelleLigne = getPosition().getRow() + this.direction.getRowDir();
-        int nouvelleColonne = getPosition().getCol() +this.direction.getColDir();
+        int nouvelleLigne;
+        int nouvelleColonne;
+        if (this.boost){
+            nouvelleLigne = getPosition().getRow() + 2*(this.direction.getRowDir());
+            nouvelleColonne = getPosition().getCol() +2*(this.direction.getColDir());
+            this.boost = false;
+        }else{
+            nouvelleLigne = getPosition().getRow() + this.direction.getRowDir();
+            nouvelleColonne = getPosition().getCol() +this.direction.getColDir();
+        }
         // Ecran.afficher(nouvelleColonne);
         setPosition(new Position(nouvelleLigne, nouvelleColonne));
     }
@@ -31,6 +40,7 @@ public class Personnage extends Case{
     public void fuir(){
         inverserX();
         inverserY();
+        setADejaBouge(true);
     }
     public void setADejaBouge(boolean bool){
         this.aDejabouge=bool;
@@ -41,10 +51,16 @@ public class Personnage extends Case{
     public void setDirection(Direction newDirection){
         this.direction = newDirection;
     }
-    public Herbe getCaseActuelle(){
+    public Case getCaseActuelle(){
         return this.caseActuelle;
     }
-    public void setCaseActuelle(Herbe caseActuelle){
+    public void setCaseActuelle(Case caseActuelle){
         this.caseActuelle = caseActuelle;
+    }
+    public boolean getBoost(){
+        return this.boost;
+    }
+    public void setBoost(boolean boost){
+        this.boost=boost;
     }
 }

@@ -28,9 +28,18 @@ public class Grille {
             this.ajouterCase(new Bord(new Position(0, i)));
             this.ajouterCase(new Bord(new Position(this.rows-1, i)));
         }
-        for (int i = 1; i < this.cols-1; i++){
-            for (int j=1; j < this.rows-1;j++){
-                this.ajouterCase(new Herbe(new Position(i,j)));
+        for (int i = 1; i < this.rows-1; i++){
+            for (int j=1; j < this.cols-1;j++){
+                double nb = Math.random();
+                if (nb > 0.15){
+                    this.ajouterCase(new Herbe(new Position(i,j)));
+                }else if (nb > 0.1 && nb < 0.15){
+                    this.ajouterCase(new Rocher(new Position(i,j)));
+                }else if ( nb > 0.05 && nb <0.1){
+                    this.ajouterCase(new Piege(new Position(i,j), false));
+                }else{
+                    this.ajouterCase(new Huile(new Position(i,j)));
+                }
             }
         }
 

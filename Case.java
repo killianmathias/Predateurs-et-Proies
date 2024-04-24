@@ -13,7 +13,19 @@ public class Case extends Grille{
         this(new Position());
     }
     void afficherCase(){
-        System.out.print(" "+ this.symbole+ " ");
+        if (this instanceof Chasseur){
+            System.out.print("\u001B[34m"+ " " + this.symbole+ " ");
+        }else if (this instanceof Renard){
+            System.out.print("\u001B[38;5;208m"+ " " + this.symbole+ " ");
+        }else if (this instanceof Poule){
+            System.out.print("\u001B[35m"+ " " + this.symbole+ " ");
+        }else if (this instanceof Lapin){
+            System.out.print("\u001B[38;5;240m"+ " " + this.symbole+ " ");
+        }else if (this instanceof Herbe){
+            System.out.print("\u001B[32m"+ " " + this.symbole+ " ");
+        }else{
+            System.out.print("\u001B[0m"+" "+ this.symbole+ " ");
+        }
     }
     public Position getPosition(){
         return position;
