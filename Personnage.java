@@ -3,11 +3,13 @@ public class Personnage extends Case{
     private boolean aDejabouge;
     private Case caseActuelle;
     boolean boost;
+    int blocked;
     
     public Personnage (Position position, char symbole, Direction direction){
         super(position,symbole);
         this.direction = direction;
         this.aDejabouge = false;
+        this.blocked = 0;
     }
     public Personnage(){
         super();
@@ -20,7 +22,7 @@ public class Personnage extends Case{
         if (this.boost){
             nouvelleLigne = getPosition().getRow() + 2*(this.direction.getRowDir());
             nouvelleColonne = getPosition().getCol() +2*(this.direction.getColDir());
-            this.boost = false;
+            setBoost(false);
         }else{
             nouvelleLigne = getPosition().getRow() + this.direction.getRowDir();
             nouvelleColonne = getPosition().getCol() +this.direction.getColDir();
@@ -62,5 +64,11 @@ public class Personnage extends Case{
     }
     public void setBoost(boolean boost){
         this.boost=boost;
+    }
+    public int getBlocked(){
+        return this.blocked;
+    }
+    public void setBlocked(int tour){
+        this.blocked = tour+2;
     }
 }

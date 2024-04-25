@@ -1,8 +1,8 @@
 public class Piege extends Case {
     private boolean ouvert;
-    Piege(Position position, boolean ouvert){
+    Piege(Position position){
         super(position, 'X');
-        this.ouvert = ouvert;
+        this.ouvert =  true;
     }
     public boolean getOuvert(){
         return this.ouvert;

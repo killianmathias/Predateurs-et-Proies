@@ -15,7 +15,11 @@ public class Grille {
         plateau[box.getPosition().getRow()][box.getPosition().getCol()] = box;
     }
     public Case getCase(Position position){
-        return plateau[position.getRow()][position.getCol()];
+        if (position.getCol()>=0 && position.getRow()>=0){
+            return plateau[position.getRow()][position.getCol()];
+        }else{
+            return null;
+        }
     }
     public void retirerCase(Position pos){
         plateau[pos.getRow()][pos.getCol()] = null;
@@ -25,20 +29,20 @@ public class Grille {
         for (int i = 0; i < this.rows; i++) {
             this.ajouterCase(new Bord(new Position(i, 0)));
             this.ajouterCase(new Bord(new Position(i, this.cols-1)));
+        }
+        for (int i=0; i<this.cols;i++){
             this.ajouterCase(new Bord(new Position(0, i)));
             this.ajouterCase(new Bord(new Position(this.rows-1, i)));
         }
         for (int i = 1; i < this.rows-1; i++){
             for (int j=1; j < this.cols-1;j++){
                 double nb = Math.random();
-                if (nb > 0.15){
-                    this.ajouterCase(new Herbe(new Position(i,j)));
-                }else if (nb > 0.1 && nb < 0.15){
+                if (nb > 0 && nb < 0.1 && i>2 && j>2 && j<this.cols-2 && i<this.rows-2){
                     this.ajouterCase(new Rocher(new Position(i,j)));
-                }else if ( nb > 0.05 && nb <0.1){
-                    this.ajouterCase(new Piege(new Position(i,j), false));
+                }else if ( nb > 0.1 && nb <0.2 && i>2 && j>2 && j<this.cols-2 && i<this.rows-2){
+                    this.ajouterCase(new Piege(new Position(i,j)));
                 }else{
-                    this.ajouterCase(new Huile(new Position(i,j)));
+                    this.ajouterCase(new Herbe(new Position(i,j)));
                 }
             }
         }
