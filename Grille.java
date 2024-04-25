@@ -41,6 +41,8 @@ public class Grille {
                     this.ajouterCase(new Rocher(new Position(i,j)));
                 }else if ( nb > 0.1 && nb <0.2 && i>2 && j>2 && j<this.cols-2 && i<this.rows-2){
                     this.ajouterCase(new Piege(new Position(i,j)));
+                }else if( nb > 0.2 && nb <0.3 && i>2 && j>2 && j<this.cols-2 && i<this.rows-2){
+                    this.ajouterCase(new Huile(new Position(i,j)));
                 }else{
                     this.ajouterCase(new Herbe(new Position(i,j)));
                 }

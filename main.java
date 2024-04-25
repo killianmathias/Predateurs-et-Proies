@@ -126,6 +126,14 @@ public class Main{
             perso.seDeplacer();
             grille.ajouterCase(perso);
             perso.setADejaBouge(true);
+        }else if (caseSuivante instanceof Huile){
+            Huile huileSuivant = (Huile)caseSuivante;
+            grille.retirerCase(perso.getPosition());
+            grille.ajouterCase(perso.getCaseActuelle());
+            perso.setCaseActuelle(huileSuivant);
+            perso.seDeplacer();
+            grille.ajouterCase(perso);
+            
         }
     }
     
@@ -159,6 +167,11 @@ public class Main{
                         if (caseCourante instanceof Personnage) {
                             Personnage perso = (Personnage) caseCourante;
                             Case caseSuivante = grille.getCase(new Position(perso.getPosition().getRow()+ perso.getDirection().getRowDir(),perso.getPosition().getCol() + perso.getDirection().getColDir()));
+                            if (caseSuivante instanceof Huile){
+                                str+="\nLe personnage glise :"+perso.getPosition().afficherPosition();
+                                seDeplace(perso, grille, caseSuivante);
+                                caseSuivante=grille.getCase(new Position(perso.getPosition().getRow()+ perso.getDirection().getRowDir(),perso.getPosition().getCol() + perso.getDirection().getColDir()));
+                            }   
                             if (!perso.getADejaBouge() && perso.getBlocked()<=tour_actuel) {
                                 Position positionY = new Position(perso.getPosition().getRow(),perso.getPosition().getCol() + perso.getDirection().getColDir());
                                 Position positionX = new Position(perso.getPosition().getRow()+ perso.getDirection().getRowDir(),perso.getPosition().getCol());
