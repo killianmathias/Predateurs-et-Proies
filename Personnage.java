@@ -2,14 +2,20 @@ public class Personnage extends Case{
     private Direction direction;
     private boolean aDejabouge;
     private Case caseActuelle;
-    boolean boost;
-    int blocked;
+    private boolean boost;
+    private boolean blocked;
     
     public Personnage (Position position, char symbole, Direction direction){
         super(position,symbole);
         this.direction = direction;
         this.aDejabouge = false;
-        this.blocked = 0;
+        this.blocked = false;
+    }
+    public Personnage (Position position, char symbole, Direction direction, Grille grille){
+        super(position,symbole,grille);
+        this.direction = direction;
+        this.aDejabouge = false;
+        this.blocked = false;
     }
     public Personnage(){
         super();
@@ -22,7 +28,6 @@ public class Personnage extends Case{
         if (this.boost){
             nouvelleLigne = getPosition().getRow() + 2*(this.direction.getRowDir());
             nouvelleColonne = getPosition().getCol() +2*(this.direction.getColDir());
-            setBoost(false);
         }else{
             nouvelleLigne = getPosition().getRow() + this.direction.getRowDir();
             nouvelleColonne = getPosition().getCol() +this.direction.getColDir();
@@ -59,16 +64,13 @@ public class Personnage extends Case{
     public void setCaseActuelle(Case caseActuelle){
         this.caseActuelle = caseActuelle;
     }
-    public boolean getBoost(){
-        return this.boost;
+    public void agiSur(Case caseSuivante){
+
     }
-    public void setBoost(boolean boost){
-        this.boost=boost;
+    public void setBlocked(boolean bool){
+        this.blocked = bool;
     }
-    public int getBlocked(){
+    public boolean getBlocked(){
         return this.blocked;
-    }
-    public void setBlocked(int tour){
-        this.blocked = tour+2;
     }
 }

@@ -1,10 +1,20 @@
-public class Case extends Grille{
+public class Case{
     private Position position;
     private char symbole;
+    private Grille grille;
 
-    public Case(Position position, char symbole){
+    Case(Position position, char symbole){
         this.position = position;
         this.symbole = symbole;
+    }
+    Case(Position position, char symbole, Grille grille){
+        this.position = position;
+        this.symbole = symbole;
+        this.grille= grille;
+    }
+    Case(Position position, Grille grille){
+        this.position = position;
+        this.grille= grille;
     }
     Case(Position position){
         this(position,'.');
@@ -12,6 +22,19 @@ public class Case extends Grille{
     Case(){
         this(new Position());
     }
+    Case getCaseActuelle(){
+        return null;
+    }
+    public Direction getDirection(){
+        return new Direction();
+    }
+    public boolean getADejaBouge(){
+        return true;
+    }
+    public void agiSur(Case caseSuivante){
+
+    }
+    public void setADejaBouge(boolean b){}
     void afficherCase(){
         if (this instanceof Chasseur){
             System.out.print("\u001B[34m"+ " " + this.symbole+ " ");
@@ -35,5 +58,24 @@ public class Case extends Grille{
     }
     public void setSymbole(char symbole){
         this.symbole = symbole;
+    }
+    public void seDeplacer(Case caseSuivante){
+        
+    }
+    public void redirige(Personnage perso){
+        // perso.setPosition(this.getPosition());
+    }
+    public Grille getGrille(){
+        return this.grille;
+    }
+    public int getSexe(){
+        return -1;
+    }
+    public void pousseHerbe(){
+    }
+    public void setOuvert(){}
+    public void symboleOuvert(){}
+    public int getLongueur(){
+        return -1;
     }
 }

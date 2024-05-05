@@ -18,13 +18,20 @@ public class Direction {
     public Direction genererDirectionAleatoire(){
         int rowDir = (int)(Math.random()*3)-1;
         int colDir = (int)(Math.random()*3)-1;
-        Direction dir = new Direction(rowDir, colDir);
-        return dir;
+        return this.setDirection(rowDir,colDir);
+    }
+    public Direction setDirection(int rowDir,int colDir){
+        this.rowDir = rowDir;
+        this.colDir = colDir;
+        return this;
     }
     public void inverserDirY(){
         this.colDir = (this.colDir)*(-1);
     }
     public void inverserDirX(){
         this.rowDir = (this.rowDir)*(-1);
+    }
+    public String afficherDirection(){
+        return "("+this.rowDir+","+this.colDir+")";
     }
 }
